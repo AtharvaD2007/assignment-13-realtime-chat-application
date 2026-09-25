@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wire — Group Chat</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===================== LOGIN SCREEN ===================== -->
+  <section id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="login-mark">Wire</div>
+      <p class="login-sub">Multi-room chat, typing indicators, and direct messages.</p>
+      <form id="loginForm">
+        <label for="usernameInput">Your name</label>
+        <input id="usernameInput" type="text" maxlength="20" placeholder="e.g. Aarav" autocomplete="off" required />
+        <button type="submit">Enter chat</button>
+      </form>
+      <p id="loginError" class="login-error" hidden></p>
+    </div>
+  </section>
+
+  <!-- ===================== MAIN APP ===================== -->
+  <div id="appScreen" class="app" hidden>
+
+    <!-- Rooms sidebar -->
+    <aside class="rooms-panel">
+      <div class="panel-head">
+        <span class="brand">Wire</span>
+        <span class="me" id="meLabel"></span>
+      </div>
+
+      <div class="panel-section-label">Rooms</div>
+      <ul id="roomList" class="room-list"></ul>
+
+      <form id="newRoomForm" class="new-room-form">
+        <input id="newRoomInput" type="text" placeholder="#new-room" maxlength="24" autocomplete="off" />
+        <button type="submit" aria-label="Create or join room">Join</button>
+      </form>
+
+      <div class="conn-status" id="connStatus">
+        <span class="dot"></span> connecting…
+      </div>
+    </aside>
+
+    <!-- Chat main -->
+    <main class="chat-main">
+      <header class="chat-header">
+        <div>
+          <h1 id="activeRoomTitle">#general</h1>
+          <p id="typingLine" class="typing-line" aria-live="polite">&nbsp;</p>
+        </div>
+      </header>
+
+      <div id="messageLog" class="message-log" aria-live="polite"></div>
+
+      <form id="messageForm" class="message-form">
+        <input id="messageInput" type="text" placeholder="Message #general" autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </main>
+
+    <!-- Presence / DM sidebar -->
+    <aside class="people-panel">
+      <div class="panel-section-label">Online in this room</div>
+      <ul id="userList" class="user-list"></ul>
+
+      <div class="panel-section-label dm-label">Direct messages</div>
+      <p class="dm-hint">Tap a name above to start a DM.</p>
+      <div id="dmLog" class="dm-log"></div>
+      <form id="dmForm" class="dm-form" hidden>
+        <input id="dmInput" type="text" placeholder="Direct message…" autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </aside>
+
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
