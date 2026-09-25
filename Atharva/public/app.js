@@ -6,7 +6,9 @@
 const DEFAULT_ROOMS = ["general", "developers", "random"];
 const TYPING_DELAY = 1800;
 
-const socket = io({ transports: ["websocket", "polling"] });
+const socket = io("https://assignment-13-realtime-chat-application-bybd.onrender.com", {
+  transports: ["websocket", "polling"]
+});
 
 let myUsername = "";
 let mySocketId = "";
